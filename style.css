@@ -31,6 +31,8 @@ main {
     gap: 10px;
 
     margin-top: 10px;
+
+    background-color: #c6c2c2;
 }
 
 .valaszok div {
@@ -41,7 +43,6 @@ main {
     border: 1px solid #ccc;
     border-radius: 8px;
 
-    background-color: #eaeaea;
 
     cursor: pointer;
     text-align: center;
@@ -51,10 +52,15 @@ main {
     background-color: #dddddd;
 }
 
-.valaszok .highlight {
-    background-color: #cdc30b;
-    
-    border: 2px solid #91c315;
+
+.correct {
+    background-color: green;
+    color: white;
+}
+
+.incorrect {
+    background-color: red;
+    color: white;
 }
 
 

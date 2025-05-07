@@ -4,13 +4,15 @@ export default class Tesztkerdes
     #index;
     #kerdes;
     #valaszok = [];
+    #helyesValasz;
 
     constructor(index, pElem, kerdes)
     {
         this.#index = index;
         this.#pElem = pElem;
         this.#kerdes = kerdes;
-        this.#valaszok = this.#kerdes.valasztas;
+        this.#helyesValasz = this.#kerdes.valasztas[0];
+        this.#valaszok = this.#kerdes.valasztas.sort(() => Math.random() - 0.5);        
         this.megjelenit();
         this.valaszMegjelenit();
     }
@@ -28,8 +30,9 @@ export default class Tesztkerdes
     valaszMegjelenit()
     {
         let html = `<div class="valaszok">`;
+        
         for (let index = 0; index < this.#valaszok.length; index++) 
-        {
+        { 
             html += `<div class="valasz${index}">${this.#valaszok[index]}</div>`;
         }
         html += `</div>`;
@@ -38,39 +41,33 @@ export default class Tesztkerdes
         this.valaszKijelol();
     }
 
-    valaszKijelol()
-    {
-        let valaszMegadott0 = document.querySelector(".valaszok:last-child .valasz0");
-        let valaszMegadott1 = document.querySelector(".valaszok:last-child .valasz1");
-        let valaszMegadott2 = document.querySelector(".valaszok:last-child .valasz2");
-        let valaszMegadott3 = document.querySelector(".valaszok:last-child .valasz3");
+    valaszKijelol() {
+        for (let i = 0; i < this.#valaszok.length; i++) 
+        {
+            const valaszElem = document.querySelector(`.valaszok:last-child .valasz${i}`);
 
-        valaszMegadott0.addEventListener("click",(event)=>{
-            console.log("Válasz kattintva: ", event.target)
-            valaszMegadott0.classList.add("highlight");
-            window.dispatchEvent(new CustomEvent("highlight", {detail: this.#index}));
-        });
-
-        valaszMegadott1.addEventListener("click",(event)=>{
-            console.log("Válasz kattintva: ", event.target)
-            valaszMegadott1.classList.add("highlight");            
-            window.dispatchEvent(new CustomEvent("highlight", {detail: this.#index}));
-        });
-
-        valaszMegadott2.addEventListener("click",(event)=>{
-            console.log("Válasz kattintva: ", event.target)
-            valaszMegadott2.classList.add("highlight");            
-            window.dispatchEvent(new CustomEvent("highlight", {detail: this.#index}));
-        });
-
-        valaszMegadott3.addEventListener("click",(event)=>{
-            console.log("Válasz kattintva: ", event.target)
-            valaszMegadott3.classList.add("highlight");            
-            window.dispatchEvent(new CustomEvent("highlight", {detail: this.#index}));
-        });
-
-
-    };
+            if (valaszElem) 
+            {
+                valaszElem.addEventListener("click", (event) => {
+                    console.log("Válasz kattintva: ", event.target);
+    
+                    if (valaszElem.innerText === this.#helyesValasz) 
+                    {
+                        valaszElem.classList.add("correct");
+                        window.dispatchEvent(new CustomEvent("helyes", { detail: this.#index }));
+                        valaszElem.style.pointerEvents = "none";
+                    } 
+                    else 
+                    {
+                        valaszElem.classList.add("incorrect");
+                        window.dispatchEvent(new CustomEvent("helytelen", { detail: this.#index }));
+                        valaszElem.style.pointerEvents = "none";
+                    }
+                });
+            }
+        }
+    }
+    
 
 
     

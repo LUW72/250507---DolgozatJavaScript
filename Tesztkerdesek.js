@@ -9,8 +9,21 @@ export default class Tesztkerdesek
     {
         this.#pElem = pElem;
         this.#kerdesObj = kerdesObj;
+        this.helyes = 0;
+        this.helytelen = 0;        
         this.kerdesElem = document.querySelector(".kerdes:last-child");
+        this.pontokElem = document.querySelector(".pontok");
+        this.pontokMegjelenit();
         this.megjelenit();
+        this.helyesListener();
+    }
+
+    pontokMegjelenit()
+    {
+        this.pontokElem.innerHTML = "";
+        let html = `<h1>Helyes: ${this.helyes}, Helytelen: ${this.helytelen}</h1>`;
+
+        this.pontokElem.insertAdjacentHTML("beforeend", html);        
     }
 
     megjelenit()
@@ -28,6 +41,22 @@ export default class Tesztkerdesek
             new Tesztkerdes(index, this.#pElem, this.#kerdesObj[index]);
         }
     }
+
+    helyesListener() 
+    {
+        window.addEventListener("helyes", () => {
+            this.helyes++;
+            console.log(this.helyes)
+            this.pontokMegjelenit();
+        });
+    
+        window.addEventListener("helytelen", () => {
+            this.helytelen++;
+            this.pontokMegjelenit();
+        });
+    }
+
+    
 
 
 }
