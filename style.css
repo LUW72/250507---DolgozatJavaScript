@@ -1,0 +1,66 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    margin: 20px;
+    background-color: lightgray;
+}
+
+main {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.kerdes {
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+}
+
+.kerdes h3, .kerdes h4 {
+    margin: 5px 0;
+}
+
+.valaszok {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.valaszok div {
+    flex: 1 1 33%; 
+
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    background-color: #eaeaea;
+
+    cursor: pointer;
+    text-align: center;
+}
+
+.valaszok div:hover {
+    background-color: #dddddd;
+}
+
+.valaszok .highlight {
+    background-color: #cdc30b;
+    
+    border: 2px solid #91c315;
+}
+
+
+@media only screen and (max-width: 600px)  
+{
+    .valaszok div {
+        flex: 1 1 100%;
+    }
+}
